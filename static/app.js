@@ -16,7 +16,7 @@ window.app = new Vue({
       var self = this
 
       axios.get(
-        '/get_message',
+        'get_message',
         { params: {message: this.message} })
         .then(function(res) {
           self.pythonResponse = res.data.inverted
