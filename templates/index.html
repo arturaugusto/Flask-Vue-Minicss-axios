@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flask-Vue-Minicss-axios</title>
+    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mini-default.min.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <button>Flask-Vue-Minicss-axios</button>
+    </header>
+    <div id="app">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="card fluid" style="height: 160px">
+              <div class="section">
+                <h3>Message input</h3>
+                  <p>Type a message and press enter</p>
+                  <div class="input-group fluid">
+                    <!--<label for="msg">Message</label>-->
+                    <input 
+                      v-model="message"
+                      value=""
+                      id="msg"
+                      @change="msgHandler($event)"
+                      placeholder="type a message..."
+                    >
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="card fluid" style="height: 160px">
+              <div class="section">
+                <h3>Response from Python</h3>
+                  <p v-show="!!pythonResponse">Inverted response:</p>
+                  <p id="python_response">
+                    [[pythonResponse]]
+                  </p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-lg-12">
+
+            <table v-if="responseList.length">
+              <caption>Response History</caption>
+              <thead>
+                <tr>
+                  <th>Server Date</th>
+                  <th>Original</th>
+                  <th>Inverted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in responseList">
+                  <td data-label="Server Date">[[item.serverDate]]</td>
+                  <td data-label="Original">[[item.original]]</td>
+                  <td data-label="Inverted">[[item.inverted]]</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </body>
+  <script src="{{ url_for('static', filename='vue.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='axios.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</html>
